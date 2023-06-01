@@ -21,7 +21,7 @@ jobs:
       DB_NAME: ${{ secrets.DB_NAME }}
     steps:
       - name: clone code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: render configs
         run: |
           mkdir deploy
@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: "deploy/docker-compose.yaml,deploy/docker_config.py"
-          target: "exam_ci"
+          target: "examen_ci"
           strip_components: 1
       - name: deploy app
         uses: appleboy/ssh-action@v0.1.10
@@ -43,5 +43,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd exam_ci
+            cd examen_ci
             echo ${{ secrets.PASSWORD }} | sudo -S docker-compose up -d
